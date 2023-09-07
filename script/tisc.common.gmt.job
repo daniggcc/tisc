@@ -88,7 +88,7 @@ set zmaxm = `echo  $zmax \* 1000 | bc -l`
 set ZRegion	= $zmin/$zmax
 set Timenow = `awk -v dt=$dt '(NR==1) {txt=substr($(NF-1),4,8); if (dt>.1) printf("%.1f", txt); else printf("%.2f", txt); exit;}' $prj.hrz`
 set xtime = `echo $x0 + $Lx \* .001  | bc -l`
-set ytime = `echo $yf - $Ly \* .001  | bc -l`
+set ytime = `echo $yf - $Ly \* .01  | bc -l`
 set xtitle = `echo $xf - $Lx \* .007  | bc -l`
 set ytitle = `echo $y0 + $Ly \* .015 | bc -l`
 set xt =     `echo $xf - 12  | bc -l`
@@ -275,6 +275,14 @@ B	255 255 255
 F	30   30   30
 END
 
+cat - <<END>  $tmp.eros_cumul_cpt.tmp
+	-.8	150	0	200	-.3	150	0	200
+	-.3	70	0	255	-.2	70	0	255
+	-.2	0	60	255	-.1	0	60	255
+	-.1	30	140	255	0	255	255	255
+END
+cat $tmp.sed_cpt.tmp >>  $tmp.eros_cumul_cpt.tmp
+
 cat - <<END>  $tmp.erosrate_cpt.tmp
 	-10 180	0	0	-1 180	0	0
 	-1	255	0	0	-0.1	150	190	0
@@ -286,14 +294,6 @@ cat - <<END>  $tmp.erosrate_cpt.tmp
 	1	212	43	255	10	212	43	255
 END
 #makecpt -Ccool -T.1/10/1 -Qo -D >> $tmp.erosrate_cpt.tmp
-
-cat - <<END>  $tmp.eros_cumul_cpt.tmp
-	-.8	150	0	200	-.3	150	0	200
-	-.3	70	0	255	-.2	70	0	255
-	-.2	0	60	255	-.1	0	60	255
-	-.1	30	140	255	0	255	255	255
-END
-cat $tmp.sed_cpt.tmp >>  $tmp.eros_cumul_cpt.tmp
 
 #makecpt -T0/$sedloadmax/1 > $tmp.sedload_cpt.tmp
 cat  <<END> $tmp.sedload_cpt.tmp
@@ -365,6 +365,7 @@ if (-r $prj.hrz) then
 		print($1,$2,sedthick/1e3); \
 	} }' $prj.hrz | xyz2grd -G$tmp.sed.grd.tmp -I$dx/$dy -R -H0
 endif
+grd2cpt $tmp.sed.grd.tmp -Ctopo > $tmp.sed_cpt.tmp
 
 #eros./sed.:
 if (-r $prj.st) then

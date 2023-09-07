@@ -85,7 +85,9 @@ float	Kerosdif, 		/*Diffusive erosion rate in m2/Ma, (e. g. D. Waltham & S. Hard
 	permeability, /*[m2]*/
 	rain, Krain, 		/*[m3/s/m2], [m3/s/m2/m] or m/s*/
 	relative_humidity, 	/*Relative humidity at the upwind boundary (incoming air rel. humidity) [no units]*/
-	CXrain, 		/*[m3/s/m2], [m3/s/m2/m], [m], [m]*/
+	CXrain, 		/*[m]*/
+	rain_per, 		/*My*/
+	rain_amp, 		/*-*/
 	total_bedrock_eros_mass,
 	total_sed_mass; 
 

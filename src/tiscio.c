@@ -401,6 +401,8 @@ int match_parameter (char *str1, char *str2, int show, int replace, char *line)
 	Match_Param_Replace_flt ( "windazimut",	windazimut,  	0 )
 	Match_Param_Replace_flt ( "CXrain",	CXrain,  	0 )
 	Match_Param_Replace_flt ( "CYrain",	CYrain,  	0 )
+	Match_Param_Replace_flt ( "rain_per",	rain_per,  	0 )
+	Match_Param_Replace_flt ( "rain_amp",	rain_amp,  	0 )
 	Match_Param_Replace_flt ( "evaporation",	evaporation_ct,  	0 )
 	Match_Param_Replace_flt ( "lost_rate",	lost_rate,  	0 )
 	Match_Param_Replace_flt ( "permeability",	permeability,  	0 )
@@ -627,6 +629,8 @@ int read_file_resume(char *filename)
 	fread(&windazimut, 	sizeof(float),		1, 	file);
 	fread(&CXrain, 	sizeof(float),		1, 	file);
 	fread(&CYrain, 	sizeof(float),		1, 	file);
+	fread(&rain_per, 	sizeof(float),		1, 	file);
+	fread(&rain_amp, 	sizeof(float),		1, 	file);
 	fread(&total_bedrock_eros_mass, 	sizeof(float),		1, 	file);
 	fread(&total_sed_mass, 	sizeof(float),		1, 	file);
 
@@ -852,6 +856,7 @@ int read_file_node_defs(float dt_st)
 		PRINT_DEBUG("Node specified: %d,%d, %d, %f", i,j, type, value);
 		switch (type) {
 		    case 1:
+			if (rain_amp) value *= (1-rain_amp*sin((Time-Timeini)/rain_per*2*3.1415927));
 			drainage[i][j].discharge += value;
 			total_rain += value;
 			break;
@@ -1718,6 +1723,8 @@ int write_file_resume()
 	fwrite(&windazimut, 	sizeof(float),		1, 	file);
 	fwrite(&CXrain, 	sizeof(float),		1, 	file);
 	fwrite(&CYrain, 	sizeof(float),		1, 	file);
+	fwrite(&rain_per, 	sizeof(float),		1, 	file);
+	fwrite(&rain_amp, 	sizeof(float),		1, 	file);
 	fwrite(&total_bedrock_eros_mass, 	sizeof(float),		1, 	file);
 	fwrite(&total_sed_mass, 	sizeof(float),		1, 	file);
 

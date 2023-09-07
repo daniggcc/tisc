@@ -40,13 +40,10 @@ A_ice_rheo	../include/tisc.sync-conflict-20230808-194411-PGO3ZZN.h	/^	A_ice_rheo
 A_ice_slide	../include/tisc.h	/^	A_ice_slide, $/;"	v
 A_ice_slide	../include/tisc.sync-conflict-20230808-194411-PGO3ZZN.h	/^	A_ice_slide, $/;"	v
 Add_Node_To_Lake	surf_proc.c	/^int Add_Node_To_Lake (int row, int col, int i_lake)$/;"	f
-Add_Node_To_Lake	surf_proc.sync-conflict-20230808-194538-PGO3ZZN.c	/^int Add_Node_To_Lake (int row, int col, int i_lake)$/;"	f
 Add_Outlet_To_Lake	surf_proc.c	/^int Add_Outlet_To_Lake (int row_sd, int col_sd, int row_tr, int col_tr, int i_lake)$/;"	f
-Add_Outlet_To_Lake	surf_proc.sync-conflict-20230808-194538-PGO3ZZN.c	/^int Add_Outlet_To_Lake (int row_sd, int col_sd, int row_tr, int col_tr, int i_lake)$/;"	f
 Allocate_Memory	tisclib.c	/^int Allocate_Memory()$/;"	f
 Allocate_Memory_for_external_use	tisclib.c	/^int Allocate_Memory_for_external_use()$/;"	f
 Attempt_Delete_Node_From_Lake	surf_proc.c	/^int Attempt_Delete_Node_From_Lake (int row, int col)$/;"	f
-Attempt_Delete_Node_From_Lake	surf_proc.sync-conflict-20230808-194538-PGO3ZZN.c	/^int Attempt_Delete_Node_From_Lake (int row, int col)$/;"	f
 BLOCK	../include/types_n_defs.h	/^struct BLOCK { 		\/*for TISC*\/$/;"	s
 BLOCK_1D	../include/types_n_defs.h	/^struct BLOCK_1D {	\/*for tAo*\/$/;"	s
 BOOL	../include/types_n_defs.h	/^typedef enum BOOLEAN	{NO, YES} BOOL;$/;"	t	typeref:enum:BOOLEAN
@@ -59,14 +56,12 @@ Blocks_base	../include/tisc.h	/^	**Blocks_base,		\/*Base of Blocks[0] (the lowes
 Blocks_base	../include/tisc.sync-conflict-20230808-194411-PGO3ZZN.h	/^	**Blocks_base,		\/*Base of Blocks[0] (the lowest) measured from the current position of the original datum surface (now deflected by isostasy*\/$/;"	v
 CGU	../include/universal.h	/^	CGU	= 6.6732E-11, 		\/*Constant of Universal Gravitation [m3·s-2·kg-1]*\/$/;"	v
 CS2D	../include/types_n_defs.h	/^struct CS2D {$/;"	s
-CXrain	../include/tao+tisc.h	/^	CXrain, 		\/*[m3\/s\/m2], [m3\/s\/m2\/m], [m], [m]*\/$/;"	v
+CXrain	../include/tao+tisc.h	/^	CXrain, 		\/*[m]*\/$/;"	v
 CYrain	../include/tisc.h	/^	CYrain, windazimut, 	\/*[m], [degrees]*\/$/;"	v
 CYrain	../include/tisc.sync-conflict-20230808-194411-PGO3ZZN.h	/^	CYrain, windazimut, 	\/*[m], [degrees]*\/$/;"	v
 Calculate_2D_Cross_Section	tiscio.c	/^int Calculate_2D_Cross_Section (struct BLOCK *Blocks, struct CS2D *CrossSection, int Nx2D)$/;"	f
 Calculate_Discharge	surf_proc.c	/^int Calculate_Discharge (struct GRIDNODE *sortcell, float *total_lost_water, float *total_evap_water, float *total_underground_water)$/;"	f
-Calculate_Discharge	surf_proc.sync-conflict-20230808-194538-PGO3ZZN.c	/^int Calculate_Discharge (struct GRIDNODE *sortcell, float *total_lost_water, float *total_evap_water, float *total_underground_water)$/;"	f
 Calculate_Precipitation_Evaporation	surf_proc.c	/^int Calculate_Precipitation_Evaporation ()$/;"	f
-Calculate_Precipitation_Evaporation	surf_proc.sync-conflict-20230808-194538-PGO3ZZN.c	/^int Calculate_Precipitation_Evaporation ()$/;"	f
 D	../include/tisc.h	/^float 	**D,			\/*Equivalent rigidity grid*\/$/;"	v
 D	../include/tisc.sync-conflict-20230808-194411-PGO3ZZN.h	/^float 	**D,			\/*Equivalent rigidity grid*\/$/;"	v
 DOMAIN_LIMIT	../include/types_n_defs.h	/^#define DOMAIN_LIMIT(/;"	d
@@ -74,21 +69,14 @@ DOMAIN_LIMIT_1D	../include/types_n_defs.h	/^#define DOMAIN_LIMIT_1D(/;"	d
 DRAINAGE	../include/types_n_defs.h	/^struct DRAINAGE {$/;"	s
 DRAINAGE_1D	../include/types_n_defs.h	/^struct DRAINAGE_1D {$/;"	s
 Damn_River_Node	surf_proc.c	/^int Damn_River_Node ($/;"	f
-Damn_River_Node	surf_proc.sync-conflict-20230808-194538-PGO3ZZN.c	/^int Damn_River_Node ($/;"	f
 Deallocate_Lake	surf_proc.c	/^int Deallocate_Lake (int i_lake)$/;"	f
-Deallocate_Lake	surf_proc.sync-conflict-20230808-194538-PGO3ZZN.c	/^int Deallocate_Lake (int i_lake)$/;"	f
 Define_Drainage_Net	surf_proc.c	/^int Define_Drainage_Net (struct GRIDNODE *sortcell) $/;"	f
-Define_Drainage_Net	surf_proc.sync-conflict-20230808-194538-PGO3ZZN.c	/^int Define_Drainage_Net (struct GRIDNODE *sortcell) $/;"	f
 Define_Lake	surf_proc.c	/^int Define_Lake (int i_lake)$/;"	f
-Define_Lake	surf_proc.sync-conflict-20230808-194538-PGO3ZZN.c	/^int Define_Lake (int i_lake)$/;"	f
 Delete_Block	tisclib.c	/^int Delete_Block(int i_Block)$/;"	f
 Delete_Node_From_Lake	surf_proc.c	/^int Delete_Node_From_Lake (int row, int col)$/;"	f
-Delete_Node_From_Lake	surf_proc.sync-conflict-20230808-194538-PGO3ZZN.c	/^int Delete_Node_From_Lake (int row, int col)$/;"	f
 Diffusive_Eros	surf_proc.c	/^int Diffusive_Eros (float Kerosdif, float dt, float dt_eros)$/;"	f
-Diffusive_Eros	surf_proc.sync-conflict-20230808-194538-PGO3ZZN.c	/^int Diffusive_Eros (float Kerosdif, float dt, float dt_eros)$/;"	f
 Direct_mode	tisc.c	/^int Direct_mode(char *load_file_name)$/;"	f
 Divide_Lake	surf_proc.c	/^int Divide_Lake (int row, int col \/*lake node to be removed*\/) $/;"	f
-Divide_Lake	surf_proc.sync-conflict-20230808-194538-PGO3ZZN.c	/^int Divide_Lake (int row, int col \/*lake node to be removed*\/) $/;"	f
 Dq	../include/tisc.h	/^	**Dq, $/;"	v
 Dq	../include/tisc.sync-conflict-20230808-194411-PGO3ZZN.h	/^	**Dq, $/;"	v
 Dw	../include/tisc.h	/^	**Dw, $/;"	v
@@ -97,13 +85,10 @@ E	../include/universal.h	/^	E	= 7E+10, 			\/*Young modulus [N\/m2]; Gerbault, 20
 EET	../include/tisc.h	/^	**EET,			\/*Equivalent Elastic Thickness grid*\/$/;"	v
 EET	../include/tisc.sync-conflict-20230808-194411-PGO3ZZN.h	/^	**EET,			\/*Equivalent Elastic Thickness grid*\/$/;"	v
 ERODED_ERODIBILITY	surf_proc.c	/^#define ERODED_ERODIBILITY /;"	d	file:
-ERODED_ERODIBILITY	surf_proc.sync-conflict-20230808-194538-PGO3ZZN.c	/^#define ERODED_ERODIBILITY /;"	d	file:
 ET2RIG	../include/geomodel.h	/^#define	ET2RIG(/;"	d
 Elastic_Deflection	tisc.c	/^int Elastic_Deflection()$/;"	f
 Erode	surf_proc.c	/^int Erode (double d_mass, int row, int col) $/;"	f
-Erode	surf_proc.sync-conflict-20230808-194538-PGO3ZZN.c	/^int Erode (double d_mass, int row, int col) $/;"	f
 Fluvial_Transport	surf_proc.c	/^int Fluvial_Transport(struct GRIDNODE *sortcell, float dt_st, int erosed_model, float *total_lost_sed_mass, int lake_instant_fill)$/;"	f
-Fluvial_Transport	surf_proc.sync-conflict-20230808-194538-PGO3ZZN.c	/^int Fluvial_Transport(struct GRIDNODE *sortcell, float dt_st, int erosed_model, float *total_lost_sed_mass, int lake_instant_fill)$/;"	f
 GAMMA	../include/types_n_defs.h	/^#define GAMMA	/;"	d
 GAMMA_AIR	../include/types_n_defs.h	/^#define GAMMA_AIR	/;"	d
 GAMMA_GROUND	../include/types_n_defs.h	/^#define GAMMA_GROUND	/;"	d
@@ -115,9 +100,7 @@ INSIDE_BORDER	../include/types_n_defs.h	/^#define INSIDE_BORDER(/;"	d
 IN_DOMAIN	../include/types_n_defs.h	/^#define IN_DOMAIN(/;"	d
 IN_DOMAIN_1D	../include/types_n_defs.h	/^#define IN_DOMAIN_1D(/;"	d
 Ice_EroSed	surf_proc.c	/^int Ice_EroSed(float **ice_velx_sl, float **ice_vely_sl, float dt_ice, float *total_ice_eros, float *total_ice_sedim)$/;"	f
-Ice_EroSed	surf_proc.sync-conflict-20230808-194538-PGO3ZZN.c	/^int Ice_EroSed(float **ice_velx_sl, float **ice_vely_sl, float dt_ice, float *total_ice_eros, float *total_ice_sedim)$/;"	f
 Ice_Flow	surf_proc.c	/^int Ice_Flow(float **ice_velx_sl, float **ice_vely_sl, float **ice_velx_df, float **ice_vely_df, float dt_st, float *total_ice_melt, float *total_ice_precip, float *total_lost_water, float *total_evap_water)$/;"	f
-Ice_Flow	surf_proc.sync-conflict-20230808-194538-PGO3ZZN.c	/^int Ice_Flow(float **ice_velx_sl, float **ice_vely_sl, float **ice_velx_df, float **ice_vely_df, float dt_st, float *total_ice_melt, float *total_ice_precip, float *total_lost_water, float *total_evap_water)$/;"	f
 K_ice_eros	../include/tisc.h	/^	K_ice_eros, $/;"	v
 K_ice_eros	../include/tisc.sync-conflict-20230808-194411-PGO3ZZN.h	/^	K_ice_eros, $/;"	v
 K_river_cap	../include/tao+tisc.h	/^	K_river_cap, 		\/*Constant of river transport capacity [kg\/m3].*\/$/;"	v
@@ -133,17 +116,11 @@ LININTERP	../include/types_n_defs.h	/^#define LININTERP(/;"	d
 Lake	../include/tisc.h	/^struct LAKE_INFO *Lake;		\/*Lake[0] does not exist; Lake[1] is the sea or the first normal lake.*\/$/;"	v	typeref:struct:LAKE_INFO
 Lake	../include/tisc.sync-conflict-20230808-194411-PGO3ZZN.h	/^struct LAKE_INFO *Lake;		\/*Lake[0] does not exist; Lake[1] is the sea or the first normal lake.*\/$/;"	v	typeref:struct:LAKE_INFO
 Lake_Fill	surf_proc.c	/^int Lake_Fill ($/;"	f
-Lake_Fill	surf_proc.sync-conflict-20230808-194538-PGO3ZZN.c	/^int Lake_Fill ($/;"	f
 Lake_Input_Discharge	surf_proc.c	/^float Lake_Input_Discharge (int ilake) $/;"	f
-Lake_Input_Discharge	surf_proc.sync-conflict-20230808-194538-PGO3ZZN.c	/^float Lake_Input_Discharge (int ilake) $/;"	f
 Lake_Node_Number	surf_proc.c	/^int Lake_Node_Number(int row, int col)$/;"	f
-Lake_Node_Number	surf_proc.sync-conflict-20230808-194538-PGO3ZZN.c	/^int Lake_Node_Number(int row, int col)$/;"	f
 Lake_Outlet_Number	surf_proc.c	/^int Lake_Outlet_Number (int row, int col)$/;"	f
-Lake_Outlet_Number	surf_proc.sync-conflict-20230808-194538-PGO3ZZN.c	/^int Lake_Outlet_Number (int row, int col)$/;"	f
 Landslide_Transport	surf_proc.c	/^int Landslide_Transport (float critical_slope, float dt, float dt_eros)$/;"	f
-Landslide_Transport	surf_proc.sync-conflict-20230808-194538-PGO3ZZN.c	/^int Landslide_Transport (float critical_slope, float dt, float dt_eros)$/;"	f
 MASS2SEDTHICK	surf_proc.c	/^#define MASS2SEDTHICK(/;"	d	file:
-MASS2SEDTHICK	surf_proc.sync-conflict-20230808-194538-PGO3ZZN.c	/^#define MASS2SEDTHICK(/;"	d	file:
 MASS2SEDTHICK	tisc.c	/^#define MASS2SEDTHICK(/;"	d	file:
 MATHLIB_SOLVER	../include/tisc.h	/^#undef	MATHLIB_SOLVER	/;"	d
 MATHLIB_SOLVER	../include/tisc.sync-conflict-20230808-194411-PGO3ZZN.h	/^#undef	MATHLIB_SOLVER	/;"	d
@@ -152,10 +129,8 @@ MAXLENLINE	../include/types_n_defs.h	/^#define	MAXLENLINE	/;"	d
 MAXLONFICH	../include/types_n_defs.h	/^#define	MAXLONFICH	/;"	d
 MAXLONLINE	../include/types_n_defs.h	/^#define	MAXLONLINE	/;"	d
 MAXNUMLINEAS	invertfile.c	/^#define	MAXNUMLINEAS	/;"	d	file:
-MAXNUMLINEAS	invertfile.sync-conflict-20230808-194538-PGO3ZZN.c	/^#define	MAXNUMLINEAS	/;"	d	file:
 MAX_2	../include/types_n_defs.h	/^#define MAX_2(/;"	d
 MAX_LENGTH_LINE	invertfile.c	/^#define	MAX_LENGTH_LINE	/;"	d	file:
-MAX_LENGTH_LINE	invertfile.sync-conflict-20230808-194538-PGO3ZZN.c	/^#define	MAX_LENGTH_LINE	/;"	d	file:
 MIN_2	../include/types_n_defs.h	/^#define MIN_2(/;"	d
 Match_Param_Replace_chr	../include/tao+tisc.h	/^#define Match_Param_Replace_chr(/;"	d
 Match_Param_Replace_flt	../include/tao+tisc.h	/^#define Match_Param_Replace_flt(/;"	d
@@ -172,9 +147,7 @@ Match_Param_int_old	../include/tao+tisc.h	/^#define Match_Param_int_old(/;"	d
 Matosec	../include/types_n_defs.h	/^#define Matosec /;"	d
 Matrix_Info	tisclib.c	/^int Matrix_Info(float **xarxa, 						\/*Matrix.*\/$/;"	f
 Minimum_Neg_Slope	surf_proc.c	/^float Minimum_Neg_Slope (int i, int j, int *dr_row, int *dr_col) $/;"	f
-Minimum_Neg_Slope	surf_proc.sync-conflict-20230808-194538-PGO3ZZN.c	/^float Minimum_Neg_Slope (int i, int j, int *dr_row, int *dr_col) $/;"	f
 NDERS	surf_proc.c	/^#define	NDERS /;"	d	file:
-NDERS	surf_proc.sync-conflict-20230808-194538-PGO3ZZN.c	/^#define	NDERS /;"	d	file:
 NDERS	tiscio.c	/^#define NDERS /;"	d	file:
 NEIGHBOURS	../include/types_n_defs.h	/^#define NEIGHBOURS(/;"	d
 NMAXHEADERLINES	../include/tao+tisc.h	/^#define NMAXHEADERLINES	/;"	d
@@ -186,7 +159,6 @@ NOT_AT_BORDER_1D	../include/types_n_defs.h	/^#define NOT_AT_BORDER_1D(/;"	d
 NOT_OUT_BORDER	../include/types_n_defs.h	/^#define NOT_OUT_BORDER(/;"	d
 NO_DATA	../include/types_n_defs.h	/^#define NO_DATA	/;"	d
 New_Lake	surf_proc.c	/^int New_Lake ()$/;"	f
-New_Lake	surf_proc.sync-conflict-20230808-194538-PGO3ZZN.c	/^int New_Lake ()$/;"	f
 NmaxBlocks	../include/tisc.h	/^#define	NmaxBlocks	/;"	d
 NmaxBlocks	../include/tisc.sync-conflict-20230808-194411-PGO3ZZN.h	/^#define	NmaxBlocks	/;"	d
 Nx	../include/universal.h	/^	Nx, Ny, Nz,  			\/*Number of grid knots in x & z directions)*\/$/;"	v
@@ -196,9 +168,7 @@ OUT_BORDER	../include/types_n_defs.h	/^#define OUT_BORDER(/;"	d
 OUT_DOMAIN	../include/types_n_defs.h	/^#define OUT_DOMAIN(/;"	d
 OUT_DOMAIN_1D	../include/types_n_defs.h	/^#define OUT_DOMAIN_1D(/;"	d
 Orographic_Precipitation_Evaporation_conservative	surf_proc.c	/^int Orographic_Precipitation_Evaporation_conservative (float windvel, float windazimut, float relative_humidity)$/;"	f
-Orographic_Precipitation_Evaporation_conservative	surf_proc.sync-conflict-20230808-194538-PGO3ZZN.c	/^int Orographic_Precipitation_Evaporation_conservative (float windvel, float windazimut, float relative_humidity)$/;"	f
 Orographic_Precipitation_with_local_slope	surf_proc.c	/^float Orographic_Precipitation_with_local_slope (int i, int j, float windvel, float windazimut)$/;"	f
-Orographic_Precipitation_with_local_slope	surf_proc.sync-conflict-20230808-194538-PGO3ZZN.c	/^float Orographic_Precipitation_with_local_slope (int i, int j, float windvel, float windazimut)$/;"	f
 PRINT_DEBUG	../include/types_n_defs.h	/^#define PRINT_DEBUG(/;"	d
 PRINT_DEBUGPLUS	../include/types_n_defs.h	/^#define PRINT_DEBUGPLUS(/;"	d
 PRINT_ERROR	../include/types_n_defs.h	/^#define PRINT_ERROR(/;"	d
@@ -208,7 +178,6 @@ PRINT_SUMLINE	../include/types_n_defs.h	/^#define PRINT_SUMLINE(/;"	d
 PRINT_WARNING	../include/types_n_defs.h	/^#define PRINT_WARNING(/;"	d
 Perfil_info	tisclib.c	/^int Perfil_info(float *perfil, int n, float *max, float *min)$/;"	f
 Precipitation_Evaporation_at_cell	surf_proc.c	/^int Precipitation_Evaporation_at_cell (int i, int j, float *Wcol, float windvel, float dtwind)$/;"	f
-Precipitation_Evaporation_at_cell	surf_proc.sync-conflict-20230808-194538-PGO3ZZN.c	/^int Precipitation_Evaporation_at_cell (int i, int j, float *Wcol, float windvel, float dtwind)$/;"	f
 Px	../include/tisc.h	/^	Px, Py, Pxy, 		\/*Horizontal external load *\/$/;"	v
 Px	../include/tisc.sync-conflict-20230808-194411-PGO3ZZN.h	/^	Px, Py, Pxy, 		\/*Horizontal external load *\/$/;"	v
 Pxy	../include/tisc.h	/^	Px, Py, Pxy, 		\/*Horizontal external load *\/$/;"	v
@@ -224,17 +193,14 @@ Read_Open_Filename_Return	../include/tao+tisc.h	/^#define Read_Open_Filename_Ret
 Rearth	../include/universal.h	/^	Rearth	= 6378e3,		\/*Earth's radius*\/$/;"	v
 Repare_Blocks	tisclib.c	/^int Repare_Blocks()$/;"	f
 Rise_Damn_Node	surf_proc.c	/^int Rise_Damn_Node ($/;"	f
-Rise_Damn_Node	surf_proc.sync-conflict-20230808-194538-PGO3ZZN.c	/^int Rise_Damn_Node ($/;"	f
 SI	../include/types_n_defs.h	/^#define SI /;"	d
 SIGN	../include/types_n_defs.h	/^#define SIGN(/;"	d
 SIGNAL	../include/types_n_defs.h	/^#define SIGNAL	/;"	d
 SQUARE	../include/types_n_defs.h	/^#define SQUARE(/;"	d
 Sediment	surf_proc.c	/^int Sediment (double d_mass, int row, int col) $/;"	f
-Sediment	surf_proc.sync-conflict-20230808-194538-PGO3ZZN.c	/^int Sediment (double d_mass, int row, int col) $/;"	f
 SolveAlmostDiagonalTriangularEquationSystem	../lib/libreria.c	/^int SolveAlmostDiagonalTriangularEquationSystem ($/;"	f
 Sort_Matrix	tisclib.c	/^float Sort_Matrix (float **matrix, struct GRIDNODE *orden, int Nx, int Ny)$/;"	f
 Surface_Transport	surf_proc.c	/^int Surface_Transport (float **topo, float **topo_ant, float dt, float dt_eros, int erosed_model, int lake_instant_fill) $/;"	f
-Surface_Transport	surf_proc.sync-conflict-20230808-194538-PGO3ZZN.c	/^int Surface_Transport (float **topo, float **topo_ant, float dt, float dt_eros, int erosed_model, int lake_instant_fill) $/;"	f
 TAKE_LINE_1	../include/types_n_defs.h	/^#define TAKE_LINE_1(/;"	d
 TAKE_LINE_2	../include/types_n_defs.h	/^#define TAKE_LINE_2(/;"	d
 TAKE_LINE_3	../include/types_n_defs.h	/^#define TAKE_LINE_3(/;"	d
@@ -245,9 +211,7 @@ TEMPERATURE_GROUND	../include/types_n_defs.h	/^#define TEMPERATURE_GROUND(/;"	d
 TEMPERATURE_ICE	../include/types_n_defs.h	/^#define TEMPERATURE_ICE(/;"	d
 TEMP_FREEZE_WATER	../include/types_n_defs.h	/^#define TEMP_FREEZE_WATER	/;"	d
 THICK2SEDMASS	surf_proc.c	/^#define THICK2SEDMASS(/;"	d	file:
-THICK2SEDMASS	surf_proc.sync-conflict-20230808-194538-PGO3ZZN.c	/^#define THICK2SEDMASS(/;"	d	file:
 TRANSPORT_BOUNDARY_CONDITIONS	surf_proc.c	/^#define TRANSPORT_BOUNDARY_CONDITIONS /;"	d	file:
-TRANSPORT_BOUNDARY_CONDITIONS	surf_proc.sync-conflict-20230808-194538-PGO3ZZN.c	/^#define TRANSPORT_BOUNDARY_CONDITIONS /;"	d	file:
 Te_default	../include/geomodel.h	/^	Te_default,				\/*Default elastic plate thicknes [m]*\/$/;"	v
 The_End	tisc.c	/^int The_End()$/;"	f
 Time	../include/geomodel.h	/^	Time=0, 				\/*Present Time of the model running [s]*\/$/;"	v
@@ -255,7 +219,6 @@ Timefinal	../include/geomodel.h	/^	Timeini=0, Timefinal=0, \/*Initial and final 
 Timeini	../include/geomodel.h	/^	Timeini=0, Timefinal=0, \/*Initial and final Times [s]*\/$/;"	v
 TriangularizeAlmostDiagonalEquationSystem	../lib/libreria.c	/^int TriangularizeAlmostDiagonalEquationSystem($/;"	f
 Unify_Lakes	surf_proc.c	/^int Unify_Lakes (int i_lake, int i_lake_to_delete)$/;"	f
-Unify_Lakes	surf_proc.sync-conflict-20230808-194538-PGO3ZZN.c	/^int Unify_Lakes (int i_lake, int i_lake_to_delete)$/;"	f
 VERTANOMCONTRIB	../lib/libreria.c	/^#define VERTANOMCONTRIB(/;"	d	file:
 Viscous_Relaxation	tisc.c	/^int Viscous_Relaxation()$/;"	f
 WriteAlmostDiagonalMatrix	../lib/libreria.c	/^int WriteAlmostDiagonalMatrix (double **A, double *b, int rango, char *filename, int NDs, int NDi)$/;"	f
@@ -288,7 +251,6 @@ col_sd	../include/types_n_defs.h	/^	int *col_sd;$/;"	m	struct:LAKE_INFO
 compact_depth	../include/tao+tisc.h	/^	compact_depth, $/;"	v
 compaction	../lib/libreria.c	/^float compaction(float phi0, float comp_depth, float z1, float z2) $/;"	f
 constant_rate_eros	surf_proc.c	/^int constant_rate_eros ($/;"	f
-constant_rate_eros	surf_proc.sync-conflict-20230808-194538-PGO3ZZN.c	/^int constant_rate_eros ($/;"	f
 critical_slope	../include/tao+tisc.h	/^	critical_slope, 	\/*for landsliding*\/$/;"	v
 critical_stress	../include/tao+tisc.h	/^	critical_stress, 	\/*basal shear stress needed for grain mobilisation*\/$/;"	v
 crust_thick_default	../include/geomodel.h	/^	crust_thick_default, 	\/*Default thickness for crust [m]*\/$/;"	v
@@ -407,17 +369,13 @@ lost_rate	../include/tao+tisc.h	/^	lost_rate, 		\/*Percent of lost water per uni
 main	blockxyz.c	/^int main(int argc, char **argv)$/;"	f
 main	cuthrz.c	/^int main(int argc, char **argv)$/;"	f
 main	invertfile.c	/^int main (int argc, char **argv)$/;"	f
-main	invertfile.sync-conflict-20230808-194538-PGO3ZZN.c	/^int main (int argc, char **argv)$/;"	f
 main	lonlat2xy.c	/^main(int argc, char **argv)$/;"	f
-main	lonlat2xy.sync-conflict-20230808-194537-PGO3ZZN.c	/^main(int argc, char **argv)$/;"	f
 main	outin.c	/^main(int argc, char **argv)$/;"	f
-main	outin.sync-conflict-20230808-194537-PGO3ZZN.c	/^main(int argc, char **argv)$/;"	f
 main	tisc.c	/^int main(int argc, char **argv)$/;"	f
 masstr	../include/types_n_defs.h	/^	float masstr;		\/*sediment load: mass exiting the cell [kg\/s]*\/$/;"	m	struct:DRAINAGE
 masstr	../include/types_n_defs.h	/^	float masstr;		\/*sediment load: mass exiting the cell [kg\/s]*\/$/;"	m	struct:DRAINAGE_1D
 match_parameter	tiscio.c	/^int match_parameter (char *str1, char *str2, int show, int replace, char *line)$/;"	f
 max_water_in_air_colum	surf_proc.c	/^float max_water_in_air_colum (int i, int j)$/;"	f
-max_water_in_air_colum	surf_proc.sync-conflict-20230808-194538-PGO3ZZN.c	/^float max_water_in_air_colum (int i, int j)$/;"	f
 mode_interp	../include/tisc.h	/^	mode_interp, 		$/;"	v
 mode_interp	../include/tisc.sync-conflict-20230808-194411-PGO3ZZN.h	/^	mode_interp, 		$/;"	v
 move_Blocks	tisc.c	/^int move_Blocks()$/;"	f
@@ -458,6 +416,8 @@ projectname	../include/geomodel.h	/^	projectname[MAXLONFICH],\/*The project name
 q	../include/tisc.h	/^	**q, $/;"	v
 q	../include/tisc.sync-conflict-20230808-194411-PGO3ZZN.h	/^	**q, $/;"	v
 rain	../include/tao+tisc.h	/^	rain, Krain, 		\/*[m3\/s\/m2], [m3\/s\/m2\/m] or m\/s*\/$/;"	v
+rain_amp	../include/tao+tisc.h	/^	rain_amp, 		\/*-*\/$/;"	v
+rain_per	../include/tao+tisc.h	/^	rain_per, 		\/*My*\/$/;"	v
 random_topo	../include/tao+tisc.h	/^	random_topo=0, 			\/*Maximum random variation of initial topo*\/$/;"	v
 read_file_2D_CS	tiscio.c	/^int read_file_2D_CS (struct BLOCK *Blocks, struct CS2D *CrossSection, int Nx2D)$/;"	f
 read_file_Te	tiscio.c	/^int read_file_Te()$/;"	f
@@ -511,9 +471,7 @@ switch_write_file_Blocks	../include/tao+tisc.h	/^	switch_write_file_Blocks, 	\/*
 syntax	blockxyz.c	/^syntax(int argc, char **argv)$/;"	f
 syntax	cuthrz.c	/^int syntax (int argc, char **argv)$/;"	f
 syntax	lonlat2xy.c	/^int syntax(int argc, char **argv)$/;"	f
-syntax	lonlat2xy.sync-conflict-20230808-194537-PGO3ZZN.c	/^syntax(int argc, char **argv)$/;"	f
 syntax	outin.c	/^int syntax () $/;"	f
-syntax	outin.sync-conflict-20230808-194537-PGO3ZZN.c	/^syntax () {$/;"	f
 syntax	tisc.c	/^int syntax()$/;"	f
 tau	../include/geomodel.h	/^	tau ;					\/*Viscoelastic relaxation Time [s]*\/$/;"	v
 tectload	tisc.c	/^int tectload()$/;"	f

@@ -1,7 +1,7 @@
 ### TISC parameters file ###
 
 #TISC VERSION FOR THIS FILE:
-version		TISC_2019-05-03
+version		TISC_2023-08-31
 
 #MODEL REGION: 
 #Coordinates of the corner nodes (center of corner cells, as in netCDF's "node
@@ -91,10 +91,11 @@ hydro_model	0	Defines the hydrological (climate&drainage) model.
 			#0: no precipitation, no fluvial transport. The 
 				following parameters have no effect.
 			#1: runoff(x,y) = (rain + Krain*elevation[km]) * 
-				(1-DX/CXrain) * (1-DY/CYrain) 
-				is used unless a *.RAIN file is given or where the 
-				value in that file is negative. DX,DY is the 
-				distance to the centre of the model.
+				(1-DX/CXrain) * (1-DY/CYrain) * (1-rain_amp*sin((Time-Timeini)/rain_per*2*pi))
+				is used unless a *.RAIN file is given (or where the 
+				value in that file is negative). DX,DY is the 
+				distance to the centre of the model; rain_amp, rain_per define
+				a harmonic variation in precipitation.
 			#2: orographic precipitation following Roer et al. (2003, JGR).
 			#3: orographic precipitation following Garcia-Castellanos (2007, 
 				EPSL), water-conservative.
@@ -133,6 +134,12 @@ CYrain		00e3	If hydro_model=1: proportionality of runoff with y
 				turbulence and finite time of condensation and precipitation 
 				(~1e4 m).
 				If hydro_model==3: unused parameter.
+rain_per	0 	Period [My] of the harmonic change in rain of amplitude 
+				<rain_amp>. See formula above.
+				If hydro_model>=1: unused parameter.
+rain_amp	0 	Amplitude of the harmonic change in rain of period <rain_per>.
+				Unitless ratio. See formula above. 0 means no harmonic change 
+				in rain. If hydro_model>=1: unused parameter.
 evaporation	00	Evaporation rate at lakes [l/m2/yr]=[mm/yr]. 
 				evaporation>runoff can significantly slow down the 
 				hydrological calculations. 
@@ -262,7 +269,9 @@ switch_files	1	For extra file output: see files *.bas *.all *.lakes in
 				doc/tisc.info.txt.
 mode_interp	4	Default interpolation mode for input files. See
 				doc/template.UNIT.
-switch_ps	1	For postscript graphic output (uses GMT4 shell scripts).
+switch_ps	2	0 for no putput; 1 for postscript graphic output (uses GMT4 
+				shell scripts as tisc.gmt.job); 2 for output every time 
+				step (dt).
 
 _______________________________________________________________________________
 #Comments:

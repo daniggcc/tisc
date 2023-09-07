@@ -98,7 +98,7 @@ int inputs (int argc, char **argv)
 
 	/*Version of TISC is matched against the parameters file *.PRM*/
 	/*¡¡ UPDATE template.PRM !!*/
-	strcpy(version, "TISC_2019-05-03");
+	strcpy(version, "TISC_2023-08-31");
 
 	/*Default parameter values are read from ./tisc/doc/template.PRM:*/
 	sprintf(projectname, "%s/doc/template", TISCDIR);
@@ -254,6 +254,7 @@ int inputs (int argc, char **argv)
 	A_ice_slide /= secsperyr;
 	rain *= 1e6/Matosec/1e3;
 	if (hydro_model==1) Krain *= 1e6/Matosec/1e3/1e3;
+	rain_per *= Matosec;
 	evaporation_ct *= 1e6/Matosec/1e3;
 	lost_rate *= 1e-2 * 1e-3;
 	temp_sea_level += TEMP_FREEZE_WATER; /*converts from C to K*/
@@ -857,7 +858,7 @@ int move_Blocks()
 int read_file_unit()
 {
 	/*
-	  READS UNIT FILE NAMED 'projectnameNUM.UNIT' WHERE 'NUM' IS 1 FOR THE 
+	  READS UNIT FILE NAMED 'projectname[NUM].UNIT' WHERE 'NUM' IS 1 FOR THE 
 	  FIRST UNIT, 2 FOR THE SECOND, ETC. Interpolates this input. Creates
 	  new unit to store its properties and cuts sediment units when file
 	  contains fault depth rather than a thickness itself.

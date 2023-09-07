@@ -30,7 +30,7 @@ extern int
 	verbose_level,
 	**lake_former_step;
 
-extern float 	Time,
+extern float 	Time, Timeini, 
 	densenv, denssedim, denscrust, 
 	dx, dy, dxy, 
 	evaporation_ct, 		/*[m3/s/m2].*/
@@ -49,6 +49,7 @@ extern float 	Time,
 	sed_porosity, 
 	rain, Krain, relative_humidity, /*[m3/s/m2], [m3/s/m2/m], []*/
 	windazimut, CXrain, CYrain, 	/*[deg], [m], [m]*/
+	rain_per, rain_amp, 
 	sea_level, temp_sea_level, 
 	total_rain,
 	total_bedrock_eros_mass,
@@ -1281,19 +1282,19 @@ int Fluvial_Transport(struct GRIDNODE *sortcell, float dt_st, int erosed_model, 
 					}
 					break;
 				  case 6:
-					/*Garcia-Castellanos & Villasenor (2011, Nature) basal shear stress approach:*/
+					/*Garcia-Castellanos & Jimenez-Munt (2015, PlosOne); Garcia-Castellanos & Villasenor (2011, Nature) basal shear stress approach:*/
 					transp_capacity_eq = K_river_cap * drainage[row][col].discharge * slope;		/*Eq. 16 of Tucker&Slingerland, 1996*/
 					TRANSPORT_BOUNDARY_CONDITIONS;
 					if (transp_capacity_eq >= drainage[row][col].masstr) {
 						float a=1.5, Kw=1.1, aw=0.5;
-						spl_m = 3*a*(1-aw)/5;
-						spl_n = 7*a/10;
+						spl_m = 3*a*(1-aw)/5; /*=0.45*/
+						spl_n = 7*a/10;		  /*=1.05*/ PRINT_DEBUGPLUS("Exponents m, n (%.2e %.2e", spl_m, spl_n)
 						/*bedrock channel incision*/
 						ERODED_ERODIBILITY;
 							dh = erodibility_aux/secsperyr * pow(1020*g, a)
 								* pow((double).05/Kw, (double) 3*a/5)
 								* pow((double)drainage[row][col].discharge, (double)spl_m) 
-								* pow((double)slope,			(double)spl_n)
+								* pow((double)slope,						(double)spl_n)
 								* dt_st;
 						if (transp_capacity_eq) dh *= (transp_capacity_eq-drainage[row][col].masstr)/transp_capacity_eq;
 							d_mass = THICK2SEDMASS(dh);
@@ -2892,19 +2893,20 @@ int Calculate_Precipitation_Evaporation ()
 		float altitude; int il;
 		for (row=0; row<Ny; row++) for (col=0; col<Nx; col++) {
  			if (precipitation_file[row][col]>=0) {
- 			precipitation[row][col] = precipitation_file[row][col];
+ 				precipitation[row][col] = precipitation_file[row][col];
  			}
  			else {
- 			altitude = topo[row][col];
- 			il=drainage[row][col].lake;
- 			if (il) {
- 				altitude = topo[Lake[il].row[Lake[il].n-1]][Lake[il].col[Lake[il].n-1]];
- 				/*Sea*/
- 				IF_LAKE_IS_SEA(il) altitude = sea_level;
- 			}
- 			precipitation[row][col] = MAX_2((rain+Krain*altitude),  0);
- 			if (CXrain) precipitation[row][col] *= MAX_2 (0, 1 + (xmin+col*dx-(xmax+xmin)/2)/CXrain);
- 			if (CYrain) precipitation[row][col] *= MAX_2 (0, 1 + (ymax-row*dy-(ymax+ymin)/2)/CYrain);
+	 			altitude = topo[row][col];
+	 			il=drainage[row][col].lake;
+	 			if (il) {
+	 				altitude = topo[Lake[il].row[Lake[il].n-1]][Lake[il].col[Lake[il].n-1]];
+	 				/*Sea*/
+	 				IF_LAKE_IS_SEA(il) altitude = sea_level;
+	 			}
+	 			precipitation[row][col] = MAX_2((rain+Krain*altitude),  0);
+	 			if (CXrain)   precipitation[row][col] *= MAX_2 (0, 1 + (xmin+col*dx-(xmax+xmin)/2)/CXrain);
+	 			if (CYrain)   precipitation[row][col] *= MAX_2 (0, 1 + (ymax-row*dy-(ymax+ymin)/2)/CYrain);
+	 			if (rain_amp) precipitation[row][col] *= (1-rain_amp*sin((Time-Timeini)/rain_per*2*3.1415927));
  			}
 		}
 		break;
@@ -2915,8 +2917,8 @@ int Calculate_Precipitation_Evaporation ()
 		}
  		break;
    		}
-			case 3: {
-			Orographic_Precipitation_Evaporation_conservative (Krain, windazimut, relative_humidity);
+		case 3: {
+		Orographic_Precipitation_Evaporation_conservative (Krain, windazimut, relative_humidity);
 		break;
 		}
 	}
