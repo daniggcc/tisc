@@ -258,13 +258,14 @@ int Surface_Transport (float **topo, float **topo_ant, float dt, float dt_eros, 
 		}
 	}
 	if (hydro_model && verbose_level>=1) {
-			int i_biggest_nosea=0, n_biggest_nosea=0, largest_river=0;
+		{
+			int i_biggest_nosea=0, n_biggest_nosea=0;
 			for (int i=1; i<=nlakes; i++) {
 				if (Lake[i].n > n_biggest_nosea) {
 					if (Lake[i].n_sd) {
-					if (topo[Lake[i].row_sd[0]][Lake[i].col_sd[0]] > sea_level)
-						n_biggest_nosea = Lake[i].n; i_biggest_nosea = i;
-					}
+						if (NOT_AT_BORDER(Lake[i].row_sd[0], Lake[i].col_sd[0]) || topo[Lake[i].row_sd[0]][Lake[i].col_sd[0]] > sea_level)
+							n_biggest_nosea = Lake[i].n; i_biggest_nosea = i;
+						}
 					else	n_biggest_nosea = Lake[i].n; i_biggest_nosea = i;
 				}
 			}
@@ -273,14 +274,29 @@ int Surface_Transport (float **topo, float **topo_ant, float dt, float dt_eros, 
 				PRINT_SUMLINE("lake %3d/%d : %7.2e km3 %7.2e km2 %4.0f m ", i, nlakes, Lake[i].vol/1e9, Lake[i].n*dx*dy/1e6, Lake[i].alt);
 				if (Lake[i].n) fprintf(stdout, "%4.0f,%-4.0f %2d out ", (Lake[i].col[0]*dx+xmin)/1e3, (ymax-Lake[i].row[0]*dy)/1e3, Lake[i].n_sd);
 				if (Lake[i].n_sd) {
-					if (topo[Lake[i].row_sd[0]][Lake[i].col_sd[0]]>sea_level) {
-					 fprintf(stdout, "@	  %3.0f,%-3.0f %5.1f m3/s", (Lake[i].col_sd[0]*dx+xmin)/1e3, (ymax-Lake[i].row_sd[0]*dy)/1e3, Lake_Input_Discharge(i));
+					if (NOT_AT_BORDER(Lake[i].row_sd[0], Lake[i].col_sd[0]) || topo[Lake[i].row_sd[0]][Lake[i].col_sd[0]] > sea_level) {
+						fprintf(stdout, "@	  %3.0f,%-3.0f %5.1f m3/s", (Lake[i].col_sd[0]*dx+xmin)/1e3, (ymax-Lake[i].row_sd[0]*dy)/1e3, Lake_Input_Discharge(i));
 					}
-					else fprintf(stdout, "Sea	%3.0f,%-3.0f %5.1f m3/s", (Lake[i].col[Lake[i].n-1]*dx+xmin)/1e3, (ymax-Lake[i].row[Lake[i].n-1]*dy)/1e3, Lake_Input_Discharge(i));
+					else
+						fprintf(stdout, "Sea	%3.0f,%-3.0f %5.1f m3/s", (Lake[i].col[Lake[i].n-1]*dx+xmin)/1e3, (ymax-Lake[i].row[Lake[i].n-1]*dy)/1e3, Lake_Input_Discharge(i));
 				}
-				else	 fprintf(stdout, "Endorh %3.0f,%-3.0f %5.1f m3/s", (Lake[i].col[Lake[i].n-1]*dx+xmin)/1e3, (ymax-Lake[i].row[Lake[i].n-1]*dy)/1e3, Lake_Input_Discharge(i));
+				else
+					fprintf(stdout, "Endorh %3.0f,%-3.0f %5.1f m3/s", (Lake[i].col[Lake[i].n-1]*dx+xmin)/1e3, (ymax-Lake[i].row[Lake[i].n-1]*dy)/1e3, Lake_Input_Discharge(i));
 				}
 			}
+		}
+		{
+			float total_lake_area_nosea=0;
+			for (int i=1; i<=nlakes; i++) {
+				//Definition of "Sea" is having outlets below sea level. Non-sea lakes have all outlets at same elevation. Lake and saddle nodes are sorted by elevation, bottom-up.
+				if (Lake[i].n_sd) {
+					if (NOT_AT_BORDER(Lake[i].row_sd[0], Lake[i].col_sd[0]) || topo[Lake[i].row_sd[0]][Lake[i].col_sd[0]] > sea_level) 
+						total_lake_area_nosea+=Lake[i].n*dx*dy;
+				}
+				else	total_lake_area_nosea+=Lake[i].n*dx*dy;
+			}
+			PRINT_SUMLINE("total_lake_area_nosea: %7.2e km2", total_lake_area_nosea);
+		}
 		{
 			float max_river_discharge=0; int imax, jmax;
 			for (int i=0; i<Ny; i++) for (int j=0; j<Nx; j++) {
@@ -290,7 +306,7 @@ int Surface_Transport (float **topo, float **topo_ant, float dt, float dt_eros, 
 					}
 			}
 			PRINT_SUMLINE("river_max: %8.2f m3/s %8.2f kg/s @ %6.1f,%.1f km, %.1f m",
-					drainage[imax][jmax].discharge, drainage[imax][jmax].masstr, (jmax*dx+xmin)/1e3, (ymax-imax*dy)/1e3, topo[imax][jmax]);
+				drainage[imax][jmax].discharge, drainage[imax][jmax].masstr, (jmax*dx+xmin)/1e3, (ymax-imax*dy)/1e3, topo[imax][jmax]);
 		}
 		{
 			float max_eros=0, max_sedim=0, diff;
@@ -504,6 +520,7 @@ int Calculate_Discharge (struct GRIDNODE *sortcell, float *total_lost_water, flo
 	/*LAKES HAVE CHANGED HERE, IN Calculate_Discharge, BY EVAPORATION!*/
 	for (int il=1; il<=nlakes; il++) {
 		if (Lake[il].n_sd) {
+			//This is the definition of when a lake is the Sea: exits below sea_level at the border. Used often elsewhere.
 			if (topo[Lake[il].row_sd[0]][Lake[il].col_sd[0]] < sea_level && AT_BORDER(Lake[il].row_sd[0], Lake[il].col_sd[0])) {
 				Lake[il].alt = sea_level;
 			}
@@ -617,16 +634,17 @@ int Define_Drainage_Net (struct GRIDNODE *sortcell)
 	flats,  i.e., lakes themself, sea and plains) at every time
 	substep  of the fluvial erosion. The topography is asumed to be
 	perfectly  sorted in 'sortcell'. 
-	The seas are distinguished from proper lakes only because they are 
-	the only lakes having outlets in the boundary and below sea level.
+	The sea bodies are defined as lakes and are differentiated from proper 
+	lakes only because they only they have outlets in the boundary and below sea level.
 	Lakes occupy topographic minima and (before evaporation is calculated)
 	always have an outlet where water exits. Sea is defined as one or more
 	lakes including at least one node below sea level in the boundary. 
-	This connection with the boundary is an exit/outlet. These outlets 
-	below sea level, allow to differenciate sea-lakes from the rest of 
-	normal lakes. Note that if a lake has no connection with the boundary 
-	then it will either be a closed lake with no outlet or it will fill 
-	above sea-level, looking for an outlet. 
+	These contact with the boundary below sea level will be considered 
+	as exits/outlets. These border outlets below sea level allow to 
+	differenciate sea-lakes from the rest of normal lakes. Note that if 
+	a lake has no connection with the boundary then it will either be a 
+	closed lake with no outlet or it will fill above sea-level, looking 
+	for an outlet. 
 
 	The following algorithm is applied to every node, starting from the 
 	lowest in ascending order. Initially nothing is known about the
@@ -706,7 +724,7 @@ int Define_Drainage_Net (struct GRIDNODE *sortcell)
 		drainage[i][j].type = '-';
 	}
 
-	/*Create lake #0 wich will contain nothing*/
+	/*Create lake #0 which will contain nothing. Lake zero is not used.*/
 	Lake = calloc(1, sizeof(struct LAKE_INFO));
 	
 	
@@ -836,13 +854,13 @@ int Define_Drainage_Net (struct GRIDNODE *sortcell)
 			  last (upper most) node, then define all 'sea-like' lakes.
 			*/
 			if (isort>0) {
-				if (topo[sortcell[isort-1].row][sortcell[isort-1].col] > sea_level) {
+			  if (topo[sortcell[isort-1].row][sortcell[isort-1].col] > sea_level) {
 				for (int l=1; l<=nlakes; l++) {
 					if (Lake[l].n_sd) {
 						Define_Lake(l);
 					}
 				}
-				}
+			  }
 			}
 			else {
 				for (int l=1; l<=nlakes; l++) {
@@ -2803,7 +2821,7 @@ int Unify_Lakes (int i_lake, int i_lake_to_delete)
 	Lake[il].col	= realloc(Lake[il].col, Lake[il].n*sizeof(int));
 	Lake[il].row_sd = realloc(Lake[il].row_sd, Lake[il].n_sd*sizeof(int));
 	Lake[il].col_sd = realloc(Lake[il].col_sd, Lake[il].n_sd*sizeof(int));
-	/*Resort nodes and saddles in increasing order of altitude, it's sometimes used!*/
+	/*Resort nodes and saddles/exits in increasing order of altitude/elevation, it's sometimes used!*/
 	/*This algorithm assumes that both unifying lakes had already their nodes and exits sorted by elevation in the Lake structure*/
 	for (i=0; i<Lake[ild].n; i++) {
 		if (Lake[il].n!=Lake[ild].n) for (j=0; j<Lake[il].n-Lake[ild].n+i; j++) {
@@ -2904,9 +2922,10 @@ int Calculate_Precipitation_Evaporation ()
 	 				IF_LAKE_IS_SEA(il) altitude = sea_level;
 	 			}
 	 			precipitation[row][col] = MAX_2((rain+Krain*altitude),  0);
-	 			if (CXrain)   precipitation[row][col] *= MAX_2 (0, 1 + (xmin+col*dx-(xmax+xmin)/2)/CXrain);
-	 			if (CYrain)   precipitation[row][col] *= MAX_2 (0, 1 + (ymax-row*dy-(ymax+ymin)/2)/CYrain);
-	 			if (rain_amp) precipitation[row][col] *= (1-rain_amp*sin((Time-Timeini)/rain_per*2*3.1415927));
+	 			if (CXrain)  	precipitation[row][col] *= MAX_2 (0, 1 + (xmin+col*dx-(xmax+xmin)/2)/CXrain);
+	 			if (CYrain)  	precipitation[row][col] *= MAX_2 (0, 1 + (ymax-row*dy-(ymax+ymin)/2)/CYrain);
+	 			if (rain_amp && rain_per) 
+	 							precipitation[row][col] *= (1-rain_amp*sin((Time-Timeini)/rain_per*2*3.1415927));
  			}
 		}
 		break;
